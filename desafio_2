@@ -1,0 +1,77 @@
+CREATE TABLE regiao (
+  id_regiao INT(10) PRIMARY KEY,
+  nome_da_regiao VARCHAR(50) NOT NULL,
+  estado VARCHAR(20) NOT NULL, 
+  pais VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE usina (
+  id_usina INT(10) PRIMARY KEY,
+  nome_da_usina VARCHAR(50) NOT NULL,
+  fonte_eletr VARCHAR(50) NOT NULL,
+  FOREIGN KEY(id_regiao)
+);
+
+CREATE TABLE geracao(
+  id_geracao INT(10) PRIMARY KEY,
+  tipo_gerador VARCHAR(50) NOT NULL,
+  registro DATE NOT NULL,
+  qtd_gerador FLOAT NOT NULL,
+  FOREIGN KEY(id_usina)
+);
+
+INSERT INTO regiao 
+(id_regiao, nome_da_regiao, estado, pais)
+VALUES
+(1, 'Norte', 'Pará', 'Brasil'),
+(2, 'Nordeste', 'Bahia', 'Brasil'),
+(3, 'Centro-Oeste', 'Goiás', 'Brasil'),
+(4, 'Sudeste', 'Minas Gerais', 'Brasil'),
+(5, 'Sul', 'Paraná', 'Brasil'),
+(6, 'Amazônia', 'Amazonas', 'Brasil'),
+(7, 'Sertão', 'Pernambuco', 'Brasil'),
+(8, 'Litoral Nordeste', 'Ceará', 'Brasil'),
+(9, 'Interior Sudeste', 'São Paulo', 'Brasil'),
+(10, 'Campanha Sul', 'Rio Grande do Sul', 'Brasil');
+
+INSERT INTO usina 
+(id_usina, nome_da_usina, fonte_eletr, id_regiao)
+VALUES
+(1, 'Usina Sol do Norte', 'Solar', 1),
+(2, 'Parque Eólico Bahia', 'Eólica', 2),
+(3, 'Usina Solar Goiás', 'Solar', 3),
+(4, 'Hidrelétrica Minas Verde', 'Hidrelétrica', 4),
+(5, 'Hidrelétrica Paraná Azul', 'Hidrelétrica', 5),
+(6, 'Usina Amazônia Energia', 'Hidrelétrica', 6),
+(7, 'Parque Solar Sertão', 'Solar', 7),
+(8, 'Parque Eólico Ceará Forte', 'Eólica', 8),
+(9, 'Usina Solar Paulista', 'Solar', 9),
+(10, 'Parque Eólico Campanha', 'Eólica', 10);
+
+INSERT INTO geracao
+(id_geracao, tipo_gerador, registro, qtd_gerador, id_usina)
+VALUES
+(1, 'Solar', '2026-08-01', 1250.50, 1),
+(2, 'Eólica', '2026-08-01', 2380.75, 2),
+(3, 'Solar', '2026-08-02', 1850.30, 3),
+(4, 'Hidrelétrica', '2026-08-02', 4200.80, 4),
+(5, 'Hidrelétrica', '2026-08-03', 3650.40, 5),
+(6, 'Hidrelétrica', '2026-08-03', 5100.25, 6),
+(7, 'Solar', '2026-08-04', 2750.60, 7),
+(8, 'Eólica', '2026-08-04', 3200.90, 8),
+(9, 'Solar', '2026-08-05', 1980.45, 9),
+(10, 'Eólica', '2026-08-05', 3450.70, 10);
+
+DELETE FROM geracao
+WHERE id_gerecao = 10;
+
+SELECT * FROM geracao;
+
+SELECT AVG(qtd_gerador)
+FROM geracao;
+
+SELECT MAX(qtd_gerador)
+FROM geracao;
+
+SELECT MIN(qtd_gerador)
+FROM geracao;
